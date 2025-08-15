@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("apiEF")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e650c24284b6b7f7734c9ab766bf96fd5d0ea509")]
 [assembly: System.Reflection.AssemblyProductAttribute("apiEF")]
 [assembly: System.Reflection.AssemblyTitleAttribute("apiEF")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
