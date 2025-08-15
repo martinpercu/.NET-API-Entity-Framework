@@ -13,4 +13,12 @@
 - Important the "using Task = apiEF.Models.Task;" is needed because we have System.Threading.Tasks.Task and the Models.Task. So here we are using the Task Model.
 
 
-
+## Data Anottation
+- In the Models files ==> Category.cs and Task.cs add the "DataAnottation"
+````
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+````
+- This is to "import" DataAnnotation
+- [Key], [Required], [MaxLength(-number here-)], ForeignKey["the key-name quoted"].
+- Important [NotMapped] this is something will not be create at the start. I used in a "summary" thats is to summaried the Description. So when the thescription exist this will bet summaryzed. This is the uses for "NotMapped".
