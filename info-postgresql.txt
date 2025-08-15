@@ -1,0 +1,21 @@
+In local (this is for MacOS)
+
+To know the services in brew
+brew services list
+
+brew services start postgresql
+brew services stop postgresql
+
+netstat -anp tcp | grep 5432
+This command will let us know if there are something listen in 5432 (this is the postgresql port)
+
+-----
+
+Important
+with 'brew services list' will show something like:
+Name              Status  User    File
+postgresql@14     started macbook ~/Library/LaunchAgents/homebrew.mxcl.postgresql@14.plist
+
+VERY IMPORTANT as user in local here is macbook ===> 
+macbook will be the Username in ConnectionStrings n appsetting.json
+
