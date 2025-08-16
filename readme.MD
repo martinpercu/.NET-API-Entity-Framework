@@ -109,3 +109,28 @@ builder.Services.AddDbContext<TasksContext>(options =>
 `````
 - ARE ALL COMMENTED because will be handle by "OnModelCreating(ModelBuilder modelBuilder)".
 - IMPORTANT Could be not commented because OnModelCreating will override. But Good practice commented(just to remember) or delete them.
+
+## Migration
+- Migration in DB is like always. The structure of DB should change so with migration we manage it.
+- First check if "ef" is installed
+````
+dotnet ef
+````
+- If not OK Install it
+````
+dotnet tool install --global dotnet-ef
+````
+- Also intall Microsoft.EntityFrameworkCore.Design ==> Find in Nuget the correct version for you.
+````
+dotnet add package Microsoft.EntityFrameworkCore.Design --version 9.0.8
+````
+- Now add the "first start point for the migration" (InitialCreate could be any name like "strartMigrationPoint" whatever is useful for you)
+````
+dotnet ef migrations add InitialCreate
+````
+- In the code we find a new folder "Migrations". There you see the files that will be use to migrations and history/reference of DB
+- IMPORTANT IMPORTANT before use the command "dotnet ef database update" should not exist a DB. Soy DROP the database before. Then...
+````
+dotnet ef database update
+````
+- IMPORTANT to be sure everything is OK Check in your Tables in the DB you shoud find a new table "__EFMigrationsHistory". 
