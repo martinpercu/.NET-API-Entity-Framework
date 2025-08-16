@@ -78,3 +78,34 @@ builder.Services.AddDbContext<TasksContext>(options =>
 ````
 - IMPORTANT ==> Now we check the endpoint http://localhost:xxxx/dbconexion ==> Should print ==>"Database is OK n Memory: False" ==> NOW SHOULD BE FALSE. Because the endpoint is now in a real DB (postgresql).
 - Also a new Folder EF-BRUNO this is where I safe the BRUNO configuration test. Bruno is like Postman or Insomnia but much simple.
+
+
+## Fluent API
+
+- This is another and more power way to manage the schemas in the DB.
+- In file TasksContext.cs you find
+````
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Category>(category =>
+        {
+            category.ToTable("Category");
+            category.HasKey(p=> p.CategoryId);
+        });
+
+        modelBuilder.Entity<Task>(task =>
+        {
+            task.ToTable("Task");
+            task.HasKey(p => p.TaskId);
+            task.HasOne(p => p.Category).WithMany(p => p.Tasks).HasForeignKey(p => p.CategoryId);
+        });
+        
+    }
+````
+- With the OnModelCreating you will contrl the schema already created in de Models. 
+- Now in the Models the ==>
+````
+[Key], [Required], [MaxLength(-number here-)], ForeignKey["the key-name quoted"].
+`````
+- ARE ALL COMMENTED because will be handle by "OnModelCreating(ModelBuilder modelBuilder)".
+- IMPORTANT Could be not commented because OnModelCreating will override. But Good practice commented(just to remember) or delete them.
