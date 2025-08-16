@@ -197,3 +197,32 @@ app.MapGet("/api/tasks/highAndCategory", async ([FromServices] TasksContext dbCo
     return Results.Ok(dbContext.Tasks.Include(p=> p.Category).Where(p=> p.PriorityTask == apiEF.Models.Priority.High));
 });
 ```
+
+## Savind data
+- In Program.cs add new endpoint to add a task. (POST )==> MapPost
+```
+app.MapPost("/api/tasks", async ([FromServices] TasksContext dbContext, [FromBody] apiEF.Models.Task task)=>
+{
+    task.TaskId = Guid.NewGuid();
+    task.DateCreation = DateTime.UtcNow;
+    await dbContext.AddAsync(task);
+    // await dbContext.Tasks.AddAsync(tarea);
+
+    await dbContext.SaveChangesAsync();
+
+    return Results.Ok();
+});
+```
+- To check in BRUNO or Postman add a Json like this
+```
+{
+  "categoryId": "00f9d419-1430-4312-bfe3-834e5f8727ca",
+  "title": "Run 5 min",
+  "description": null,
+  "priorityTask": 3
+}
+```
+- Then just check this endpoing:
+```
+http://localhost:5069/api/tasks
+```
