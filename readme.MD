@@ -174,3 +174,26 @@ dotnet ef migrations add InitialSeedingCategoryAndTask
 ```
 dotnet ef database update
 ```
+
+## Getting data
+- In Program.cs add new endpoint for all tasks
+```
+app.MapGet("/api/tasks", async ([FromServices] TasksContext dbContext) =>
+{
+    return Results.Ok(dbContext.Tasks);
+});
+```
+- Also for task with high priority
+```
+app.MapGet("/api/tasks/high", async ([FromServices] TasksContext dbContext) =>
+{
+    return Results.Ok(dbContext.Tasks.Where(p=> p.PriorityTask == apiEF.Models.Priority.High));
+});
+```
+- Also for task with high priority and the category data IS important to add [JsonIgnore] in the Category  virtual IColletion<Task> Model. Because if we get also the category from the task will also bring there the task again and all the tasks.
+```
+app.MapGet("/api/tasks/highAndCategory", async ([FromServices] TasksContext dbContext) =>
+{
+    return Results.Ok(dbContext.Tasks.Include(p=> p.Category).Where(p=> p.PriorityTask == apiEF.Models.Priority.High));
+});
+```
