@@ -134,3 +134,19 @@ dotnet ef migrations add InitialCreate
 dotnet ef database update
 ````
 - IMPORTANT to be sure everything is OK Check in your Tables in the DB you shoud find a new table "__EFMigrationsHistory". 
+
+
+## Migration Create
+- In Model Category add a field "int" to show the "Relevance" of this category.
+- Now in the TasksContext.cs add also the same field. "category.Property(p=> p.Relevance);"
+- We will call teh EF to make the needed migration.
+- First 
+````
+dotnet ef migrations add ColumnRelevantCategory
+````
+- Now in folder Migrations should be 2 more files.
+- Now update the DB
+````
+dotnet ef database update
+````
+- Now in the DB in the Category must be the Relevance field.
