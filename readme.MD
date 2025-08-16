@@ -226,3 +226,49 @@ app.MapPost("/api/tasks", async ([FromServices] TasksContext dbContext, [FromBod
 ```
 http://localhost:5069/api/tasks
 ```
+
+## Update and Delete Data
+- In Program.cs add new endpoint to add a task. (PUT )==> MapPut
+```
+app.MapPut("/api/tasks/{id}", async (
+    [FromServices] TasksContext dbContext,
+    [FromBody] apiEF.Models.Task task,
+    [FromRoute] Guid id)=>
+{
+    var theTaskToUpdate = dbContext.Tasks.Find(id);
+
+    if (theTaskToUpdate != null)
+    {
+        theTaskToUpdate.CategoryId = task.CategoryId;
+        theTaskToUpdate.Title = task.Title;
+        theTaskToUpdate.PriorityTask = task.PriorityTask;
+        theTaskToUpdate.Description = task.Description;
+
+        await dbContext.SaveChangesAsync();
+
+        return Results.Ok();
+
+    }
+    
+    return Results.NotFound();
+});
+```
+- In Program.cs add new endpoint to add a task. (DELETE )==> MapDelete
+```
+app.MapDelete("/api/tasks/{id}", async (
+    [FromServices] TasksContext dbContext,
+    [FromRoute] Guid id)=>
+{
+    var theTaskToDelete = dbContext.Tasks.Find(id);
+
+    if (theTaskToDelete != null)
+    {
+        dbContext.Remove(theTaskToDelete);
+        await dbContext.SaveChangesAsync();
+
+        return Results.Ok();
+    }
+    
+    return Results.NotFound();
+});
+```
