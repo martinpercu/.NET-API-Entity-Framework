@@ -1,4 +1,6 @@
+## Entity Framework
 
+#### I hope this repository helps you to understand and comprehend the step-by-step functionality of Entity Framework (EF) the ORM for .NET
 
 ## Models
 - Creation new folder "Models".
