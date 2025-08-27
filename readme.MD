@@ -56,3 +56,25 @@ dotnet run
 ````
 - This sould give a http://localhost:xxxx
 - We check the endpoint http://localhost:xxxx/dbconexion ==> Should print ==>"Database is OK n Memory: True"
+
+
+
+## PostgreSQL DB Connexion
+- In appsetting.json add the info to connect. In my case this one.
+````
+  "ConnectionStrings": {
+    "DefaultConnection": "Host=localhost;Port=5432;Database=TasksDBTester;Username=macbook;Password=123456"
+  }
+````
+- I left a new file info-postgresql.txt in root to remember how works in my computer if you have mac and use brew this works for you.
+- In Program.cs comment previous connexion ==> UseInMemoryDatabase("TasksDB") 
+- In Program.cs add this connexion: 
+````
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+builder.Services.AddDbContext<TasksContext>(options =>
+    options.UseNpgsql(connectionString)
+);
+````
+- IMPORTANT ==> Now we check the endpoint http://localhost:xxxx/dbconexion ==> Should print ==>"Database is OK n Memory: False" ==> NOW SHOULD BE FALSE. Because the endpoint is now in a real DB (postgresql).
+- Also a new Folder EF-BRUNO this is where I safe the BRUNO configuration test. Bruno is like Postman or Insomnia but much simple.

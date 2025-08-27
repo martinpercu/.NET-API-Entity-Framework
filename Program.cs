@@ -1,10 +1,20 @@
 using apiEF;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+// using Npgsql.EntityFrameworkCore.PostgreSQL; // Asegúrate de tener esta línea
+
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<TasksContext>(p => p.UseInMemoryDatabase("TasksDB"));
+// builder.Services.AddDbContext<TasksContext>(p => p.UseInMemoryDatabase("TasksDB"));
+
+// here the connection data
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+builder.Services.AddDbContext<TasksContext>(options =>
+    options.UseNpgsql(connectionString)
+);
+
 
 var app = builder.Build();
 
