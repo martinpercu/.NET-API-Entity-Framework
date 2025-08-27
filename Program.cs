@@ -1,7 +1,7 @@
 using apiEF;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-// using Npgsql.EntityFrameworkCore.PostgreSQL; // Asegúrate de tener esta línea
+using Npgsql.EntityFrameworkCore.PostgreSQL; // Asegúrate de tener esta línea
 
 
 var builder = WebApplication.CreateBuilder(args);

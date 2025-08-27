@@ -19,3 +19,15 @@ postgresql@14     started macbook ~/Library/LaunchAgents/homebrew.mxcl.postgresq
 VERY IMPORTANT as user in local here is macbook ===> 
 macbook will be the Username in ConnectionStrings n appsetting.json
 
+-------
+To really destroy in local ALL postgresql DBs
+
+1 - 
+brew services stop postgresql@14
+
+2 - delete the postgres data ==> VERY CAREFUL!!!!
+rm -rf /opt/homebrew/var/postgres
+
+3 - Reinitialize it 
+initdb /opt/homebrew/var/postgres
+
