@@ -22,6 +22,8 @@ public class TasksContext : DbContext
             category.Property(p=> p.Name).IsRequired().HasMaxLength(170);
 
             category.Property(p=> p.Description);
+            
+            category.Property(p=> p.Relevance);
         });
 
         modelBuilder.Entity<Task>(task =>
