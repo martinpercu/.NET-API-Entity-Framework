@@ -2,6 +2,7 @@ using apiEF;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Npgsql.EntityFrameworkCore.PostgreSQL; // Asegúrate de tener esta línea
+using apiEF.Models;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -39,6 +40,18 @@ app.MapGet("/api/tasks/high", async ([FromServices] TasksContext dbContext) =>
 app.MapGet("/api/tasks/highAndCategory", async ([FromServices] TasksContext dbContext) =>
 {
     return Results.Ok(dbContext.Tasks.Include(p=> p.Category).Where(p=> p.PriorityTask == apiEF.Models.Priority.High));
+});
+
+app.MapPost("/api/tasks", async ([FromServices] TasksContext dbContext, [FromBody] apiEF.Models.Task task)=>
+{
+    task.TaskId = Guid.NewGuid();
+    task.DateCreation = DateTime.UtcNow;
+    await dbContext.AddAsync(task);
+    // await dbContext.Tasks.AddAsync(tarea);
+
+    await dbContext.SaveChangesAsync();
+
+    return Results.Ok();
 });
 
 app.Run();
