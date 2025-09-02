@@ -26,4 +26,19 @@ app.MapGet("/dbconexion", async ([FromServices] TasksContext dbContext) =>
     return Results.Ok("Database is OK n Memory: " + dbContext.Database.IsInMemory());
 });
 
+app.MapGet("/api/tasks", async ([FromServices] TasksContext dbContext) =>
+{
+    return Results.Ok(dbContext.Tasks);
+});
+
+app.MapGet("/api/tasks/high", async ([FromServices] TasksContext dbContext) =>
+{
+    return Results.Ok(dbContext.Tasks.Where(p => p.PriorityTask == apiEF.Models.Priority.High));
+});
+
+app.MapGet("/api/tasks/highAndCategory", async ([FromServices] TasksContext dbContext) =>
+{
+    return Results.Ok(dbContext.Tasks.Include(p=> p.Category).Where(p=> p.PriorityTask == apiEF.Models.Priority.High));
+});
+
 app.Run();
