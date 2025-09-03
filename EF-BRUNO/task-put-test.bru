@@ -1,0 +1,21 @@
+meta {
+  name: task-put-test
+  type: http
+  seq: 6
+}
+
+put {
+  url: http://localhost:5069/api/tasks/00f9d419-1430-4312-bfe3-834e5f872710
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+      "categoryId": "00f9d419-1430-4312-bfe3-834e5f8727ca",
+      "title": "Run 20 min",
+      "description": "Remember the nice shoes",
+      "priorityTask": 2,
+      "dateCreation": "2025-08-16T18:00:00Z"
+  }
+}
